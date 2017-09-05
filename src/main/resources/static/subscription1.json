@@ -1,0 +1,41 @@
+{
+  "resourceType": "Subscription",
+  "meta": {
+	"versionId": "agatha-1",
+	"lastUpdated": "2017-06-30T14:58:58.041+00:00"
+  },
+  "text": {
+	"status": "generated",
+	"div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Agatha subscription</div>"
+  },
+  "criteria": "Observation?name=http://loinc.org|1975-2",
+  "reason": "Test subscription for Sept connectathon",
+  "status": "requested",
+  "extension": [
+	{
+	  "url": "http://hl7.org/fhir/subscription/topics",
+	  "valueReference": {
+		"reference": "https://example.com/EventDefinition/123",
+		"display": "patient admitted"
+	  }
+	}
+  ],
+  "channel": {
+	"type": "rest-hook",
+	"endpoint": "https://biliwatch.com/customers/mount-auburn-miu/on-result",
+	"payload": "application/json",
+	"header": "Authorization: Bearer secret-token-abc-123"
+  }
+}
+
+/*
+ POST http://fhirtest.uhn.ca/baseDstu2/Subscription?_format=json&_pretty=true
+
+Accept-Charset: utf-8
+Accept: application/json+fhir
+User-Agent: HAPI-FHIR/3.0.0-SNAPSHOT (FHIR Client; FHIR 1.0.2/DSTU2; apache)
+Accept-Encoding: gzip
+Content-Type: application/json+fhir; charset=UTF-8
+
+
+*/
