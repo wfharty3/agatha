@@ -33,7 +33,7 @@ public class HypokalemiaRule extends BasicRule implements EnhancedRule {
 		if (HapiUtils.codedAs(data.getCode(), FhirSystemEnum.LOINC.getUrl(), "2823-3")) {
 			if (data.getStatus().equalsIgnoreCase("final")) {
 				v = (BaseQuantityDt)data.getValue();
-				if (v.getValueElement().getValue().floatValue() < 7 && v.getUnitsElement().getValue().equalsIgnoreCase("mmol/L")) {
+				if (v.getValueElement().getValue().floatValue() < 2.8 && v.getUnitsElement().getValue().equalsIgnoreCase("mmol/L")) {
 					result = true;
 				}
 			}
@@ -62,5 +62,9 @@ public class HypokalemiaRule extends BasicRule implements EnhancedRule {
 
 	public List<Flag> getFlags() {
 		return flags;
+	}
+
+	public void clearFlags() {
+		flags.clear();
 	}
 }

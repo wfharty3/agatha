@@ -5,8 +5,8 @@ import ca.uhn.fhir.model.dstu2.resource.Flag;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import com.preimerinc.agatha.repository.FlagRepository;
 import com.preimerinc.agatha.rule.EnhancedRule;
+import com.preimerinc.agatha.rule.HypernatremiaRule;
 import com.preimerinc.agatha.rule.HypokalemiaRule;
-import com.preimerinc.agatha.rule.HyponatremiaRule;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -40,16 +40,19 @@ public class RulesEngineService {
 		Set<Rule> rules = re.getRules();
 		for (Rule r : rules) {
 			System.out.println(r.getName());
+			EnhancedRule er = (EnhancedRule)r;
+			// er.setData(data)
 		}
 	}
 
 	private void registerRules() {
-		re.registerRule(new HyponatremiaRule(data));
+		re.registerRule(new HypernatremiaRule(data));
 		re.registerRule(new HypokalemiaRule(data));
 		// register other rules that should run here
 	}
 
 	public List<Flag> runRules() {
+		re.clearRules();
 		registerRules();
 		re.fireRules();
 		// collect resulting flags from each rule

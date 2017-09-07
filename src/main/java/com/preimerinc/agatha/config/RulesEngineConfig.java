@@ -1,6 +1,5 @@
 package com.preimerinc.agatha.config;
 
-import com.preimerinc.agatha.rule.HyponatremiaRule;
 import org.easyrules.api.RulesEngine;
 import org.easyrules.core.RulesEngineBuilder;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +11,7 @@ public class RulesEngineConfig {
 	@Bean
 	public RulesEngine makeRuleEngine() {
 
-//		HyponatremiaRule naRule = new HyponatremiaRule();
+//		HypernatremiaRule naRule = new HypernatremiaRule();
 
 		RulesEngine rulesEngine = RulesEngineBuilder.aNewRulesEngine().build();
 //		rulesEngine.registerRule(naRule);

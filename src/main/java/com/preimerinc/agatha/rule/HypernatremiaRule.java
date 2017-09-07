@@ -14,13 +14,13 @@ import java.util.List;
 import java.util.ArrayList;
 import org.easyrules.core.BasicRule;
 
-public class HyponatremiaRule extends BasicRule implements EnhancedRule {
+public class HypernatremiaRule extends BasicRule implements EnhancedRule {
 
 	Observation data;
 
 	List<Flag> flags = new ArrayList<Flag>();
 
-	public HyponatremiaRule(Observation data) {
+	public HypernatremiaRule(Observation data) {
 		this.data = data;
 	}
 
@@ -33,7 +33,7 @@ public class HyponatremiaRule extends BasicRule implements EnhancedRule {
 		if (HapiUtils.codedAs(data.getCode(), FhirSystemEnum.LOINC.getUrl(), "2947-0")) {
 			if (data.getStatus().equalsIgnoreCase("final")) {
 				v = (BaseQuantityDt)data.getValue();
-				if (v.getValueElement().getValue().floatValue() < 140 && v.getUnitsElement().getValue().equalsIgnoreCase("mmol/L")) {
+				if (v.getValueElement().getValue().floatValue() > 152 && v.getUnitsElement().getValue().equalsIgnoreCase("mmol/L")) {
 					result = true;
 				}
 			}
@@ -62,5 +62,9 @@ public class HyponatremiaRule extends BasicRule implements EnhancedRule {
 
 	public List<Flag> getFlags() {
 		return flags;
+	}
+
+	public void clearFlags() {
+		flags.clear();
 	}
 }

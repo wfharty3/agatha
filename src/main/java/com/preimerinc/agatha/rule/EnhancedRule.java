@@ -8,5 +8,6 @@ import org.easyrules.core.BasicRule;
 public interface EnhancedRule {
 
 	public List<Flag> getFlags();
+	public void clearFlags();
 
 }
