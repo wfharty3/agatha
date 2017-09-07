@@ -51,21 +51,36 @@ public class RulesEngineService {
 		// register other rules that should run here
 	}
 
-	public List<Flag> runRules() {
-		re.clearRules();
-		registerRules();
-		re.fireRules();
-		// collect resulting flags from each rule
+
+	private List<Flag> collectFlags() {
 		Set<Rule> rules = re.getRules();
 		List<Flag> flags = new ArrayList<Flag>();
-
 		for (Rule r : rules) {
-			EnhancedRule re = (EnhancedRule)r;
-			for (Flag f: re.getFlags()) {
+			EnhancedRule er = (EnhancedRule)r;
+			for (Flag f: er.getFlags()) {
 				flags.add(f);
 			}
 			System.out.println(r.getName());
 		}
+		return flags;
+	}
+
+	private void writeFlags(List<Flag> flags) {
+		if (System.getProperty("outputFlagsTo").equalsIgnoreCase("remote")) {
+			for (Flag f : flags) {
+				flagRepo.createFlag(f);
+			}
+		}
+	}
+
+	public List<Flag> runRules() {
+		List<Flag> flags;
+
+		re.clearRules();
+		registerRules();
+		re.fireRules();
+		flags = collectFlags();
+		writeFlags(flags);
 		return flags;
 	}
 

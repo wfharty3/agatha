@@ -22,7 +22,7 @@ public class FlagRepositoryImpl implements FlagRepository {
 	}
 
 	public MethodOutcome createFlag(Flag f) {
-		IGenericClient client = ctx.newRestfulGenericClient(FhirServersEnum.UHN_DSTU2.getUrl());
+		IGenericClient client = ctx.newRestfulGenericClient(System.getProperty("serverBase"));
 
 		return client.create()
 				.resource(f)

@@ -13,14 +13,24 @@ public class SettingsController {
 
 	@RequestMapping(value="/serverBase", method = RequestMethod.POST)
 	public String setServerBase(@RequestBody String url) {
-		System.setProperty("serverBase", url );
-		return "Server base set to: " + url;
+		System.setProperty("serverBase", url.trim() );
+		return "Server base has been set to: " + url;
 	}
 
 	@RequestMapping(value="/serverBase", method = RequestMethod.GET)
 	public String getServerBase() {
-		return "Server base: " + System.getProperty("serverBase");
+		return "Current Server base: " + System.getProperty("serverBase");
 	}
 
+	@RequestMapping(value="/outputFlagsTo", method = RequestMethod.POST)
+	public String setOutput(@RequestBody String val) {
+		System.setProperty("outputFlagsTo", val.trim() );
+		return "Flag output option has been set to: " + val;
+	}
+
+	@RequestMapping(value="/outputFlagsTo", method = RequestMethod.GET)
+	public String getOutput() {
+		return "Current flag output option: " + System.getProperty("outputFlagsTo") + ".   Options are: console, local, remote";
+	}
 
 }
