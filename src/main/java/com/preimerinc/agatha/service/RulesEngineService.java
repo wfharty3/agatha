@@ -66,9 +66,12 @@ public class RulesEngineService {
 	}
 
 	private void writeFlags(List<Flag> flags) {
-		if (System.getProperty("outputFlagsTo").equalsIgnoreCase("remote")) {
-			for (Flag f : flags) {
-				flagRepo.createFlag(f);
+		for (Flag f : flags) {
+			if (System.getProperty("outputFlagsTo").equalsIgnoreCase("remote")) {
+				flagRepo.createFlagRemote(f);
+			}
+			if (System.getProperty("outputFlagsTo").equalsIgnoreCase("local")) {
+				flagRepo.createFlagLocal(f);
 			}
 		}
 	}

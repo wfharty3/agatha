@@ -4,6 +4,7 @@ import ca.uhn.fhir.model.base.composite.BaseQuantityDt;
 import ca.uhn.fhir.model.dstu2.composite.CodeableConceptDt;
 import ca.uhn.fhir.model.dstu2.composite.NarrativeDt;
 import ca.uhn.fhir.model.dstu2.composite.PeriodDt;
+import ca.uhn.fhir.model.dstu2.composite.ResourceReferenceDt;
 import ca.uhn.fhir.model.dstu2.resource.Flag;
 import ca.uhn.fhir.model.dstu2.resource.Observation;
 import ca.uhn.fhir.model.dstu2.valueset.FlagStatusEnum;
@@ -49,6 +50,7 @@ public class HypernatremiaRule extends BasicRule implements EnhancedRule {
 		Flag f = new Flag();
 		f.setCategory(new CodeableConceptDt("http://hl7.org/fhir/flag-category", "lab"));
 		f.setStatus(FlagStatusEnum.ACTIVE);
+		f.setSubject(data.getSubject());
 		f.setPeriod(new PeriodDt().setStart(new DateTimeDt(new Date())));
 		f.setText(new NarrativeDt(new XhtmlDt(
 				"Low sodium; go have some fries."),
