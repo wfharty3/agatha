@@ -65,7 +65,6 @@ public class PayloadController {
 		// return bundle to web service
 		return ctx.newJsonParser().encodeBundleToString(b);
 
-		// write code here to write flags to UHN or local db
 
 
 	}
